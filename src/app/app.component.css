@@ -1,0 +1,15 @@
+.container {
+    width: 75%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    background-color: red;
+}
+
+app-todo-list {
+    width: 100%;
+    text-align: center;
+}

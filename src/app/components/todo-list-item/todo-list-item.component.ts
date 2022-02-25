@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TodoListItem } from 'src/app/models/TodoListItem';
 
 @Component({
@@ -8,6 +8,16 @@ import { TodoListItem } from 'src/app/models/TodoListItem';
 })
 export class TodoListItemComponent implements OnInit {
     @Input() todoListItem: TodoListItem;
+    @Output() removeItemEvent = new EventEmitter<string>();
+    @Output() editItemEvent = new EventEmitter<object>();
+
+    removeItem(name: string) {
+        this.removeItemEvent.emit(name);
+    }
+
+    editItem(item: object) {
+        this.editItemEvent.emit(item);
+    }
 
     constructor() { }
 

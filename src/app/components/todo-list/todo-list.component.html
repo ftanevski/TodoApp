@@ -1,3 +1,129 @@
-<div class="container" *ngFor="let listItem of todoList">
-    <app-todo-list-item [todoListItem]="listItem"></app-todo-list-item>
+<div class="container">
+    <div class="row">
+        <h2 class="col">
+            Name 
+            <button type="button" class="sort-button" (click)="sortItems('name')">&#8595;</button>
+        </h2>
+        <h2 class="col">
+            Date 
+            <button type="button" class="sort-button" (click)="sortItems('date')">&#8595;</button>
+        </h2>
+        <h2 class="col">
+            Status
+            <button type="button" class="sort-button" (click)="sortItems('status')">&#8595;</button>
+        </h2>
+        <h2 class="col">
+
+        </h2>
+    </div>
+    <div *ngFor="let listItem of todoList">
+        <app-todo-list-item [todoListItem]="listItem" 
+                            (removeItemEvent)="removeItem($event)" 
+                            (editItemEvent)="editItem($event)" 
+                            class="row"
+        ></app-todo-list-item>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <button type="button" class="filter-button" (click)="openAddItemModal()">Add new</button>
+        <button type="button" class="filter-button" (click)="editFilter()">Filter</button>
+        <button type="button" class="clear-filter-button" (click)="clearFilter()">Clear Filters</button>
+    </div>
+</div>
+<div class="modal-container" *ngIf="visibleEditModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>
+                {{modalName}}
+            </h2>
+            <h2>
+                {{modalDate}}
+            </h2>
+            <h2>
+                {{modalStatus}}
+            </h2>
+        </div>
+        <form>
+            <fieldset class="fields-container">
+                <div class="name-container">
+                    <label for="name">Name: </label>
+                    <input type="text" id="item-name" name="name" value={{listItem.name}}>
+                </div>
+                <div class="date-container">
+                    <label for="date">Date: </label>
+                    <input type="date" id="item-date" name="date" value={{listItem.date}}>
+                </div>
+                <div class="status-container">
+                    <label for="status">Status: </label>
+                    <select id="item-status" name="status" [value]="listItem.status">
+                        <option value="Active">Active</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <button type="button" class="save-button" (click)="saveItem()">Save</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="modal-container" *ngIf="visibleFilterModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h1>Filter</h1>
+        </div>
+        <form>
+            <fieldset class="fields-container">
+                <div class="date-container">
+                    <label for="date">Date: </label>
+                    <input type="date" id="item-date-filter" name="date">
+                </div>
+                <div class="status-container">
+                    <label for="status">Status: </label>
+                    <select id="item-status-filter" name="status">
+                        <option value="Active">Active</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <button type="button" class="save-button" (click)="saveFilter()">Save</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="modal-container" *ngIf="visibleAddModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>
+                {{modalName}}
+            </h2>
+            <h2>
+                {{modalDate}}
+            </h2>
+            <h2>
+                {{modalStatus}}
+            </h2>
+        </div>
+        <form>
+            <fieldset class="fields-container">
+                <div class="name-container">
+                    <label for="name">Name: </label>
+                    <input type="text" id="item-name" name="name" value={{listItem.name}}>
+                </div>
+                <div class="date-container">
+                    <label for="date">Date: </label>
+                    <input type="date" id="item-date" name="date" value={{listItem.date}}>
+                </div>
+                <div class="status-container">
+                    <label for="status">Status: </label>
+                    <select id="item-status" name="status" [value]="listItem.status">
+                        <option value="Active">Active</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <button type="button" class="save-button" (click)="addNewItem()">Save</button>
+            </fieldset>
+        </form>
+    </div>
 </div>
